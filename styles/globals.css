@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+	@apply m-4 bg-zinc-200 dark:bg-neutral-900;
+}
+
+.dark-theme {
+	@apply bg-white dark:bg-zinc-800 dark:text-zinc-200;
+}
+
+.shadow-box {
+	@apply shadow shadow-black/25;
+}
+
+.round-2 {
+	@apply rounded p-2;
+}
+
+.transition-ease {
+	@apply transition-all ease-linear
+}
+
+.w-frac {
+	@apply w-full sm:max-w-4/5 md:max-w-3/4 lg:max-w-2/3
+}
