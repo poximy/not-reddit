@@ -70,7 +70,9 @@ const PostID: NextPage<Props> = ({ post, comments }) => {
 		<div className='flex justify-center'>
 			<div className='transition-ease w-frac flex flex-col gap-2'>
 				{post === null ? (
-					<p>Error post was not found</p>
+					<p className='shadow-box round-2 bg-red-500'>
+						Error post was not found
+					</p>
 				) : (
 					<>
 						<p className='shadow-box dark-theme round-2 w-full'>{post.title}</p>
