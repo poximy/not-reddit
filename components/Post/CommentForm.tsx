@@ -31,7 +31,11 @@ const CommentForm: FC<Props> = ({ postId }) => {
 
 	return (
 		<>
-			<form onSubmit={createComment} className='flex w-full'>
+			<form
+				id='comment-section'
+				onSubmit={createComment}
+				className='flex w-full'
+			>
 				<textarea
 					placeholder='What are your thoughts?'
 					value={commentText}
@@ -40,7 +44,7 @@ const CommentForm: FC<Props> = ({ postId }) => {
 					onChange={(event) => setCommentText(event.target.value)}
 					className='border-box shadow-box dark-theme h-fit w-full rounded-l p-2
 					font-mono focus-visible:outline-none'
-				></textarea>
+				/>
 				<input
 					type='submit'
 					value='Comment'

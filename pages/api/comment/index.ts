@@ -21,13 +21,12 @@ const validateReq = (body: any) => {
 
 const createComment = async ({ postId, text }: CommentBody) => {
 	const prisma = new PrismaClient();
-	const comment = await prisma.comment.create({
+	return await prisma.comment.create({
 		data: {
 			text,
 			postId,
 		},
 	});
-	return comment;
 };
 
 export default async function handler(

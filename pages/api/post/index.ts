@@ -13,13 +13,12 @@ const validateReq = (body: any) => {
 };
 
 const createPost = async ({ title, text }: Post) => {
-	const post = await prisma.post.create({
+	return await prisma.post.create({
 		data: {
 			title,
 			text,
 		},
 	});
-	return post;
 };
 
 export default async function handler(
