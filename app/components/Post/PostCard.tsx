@@ -7,7 +7,7 @@ const PostCard: FC<Post> = ({ id, title, text }) => {
 	return (
 		// TODO Add icon for comments and comment count
 		<Link href={`/post/${id}`}>
-			<a className='transition-ease group dark-theme shadow-box round-2 w-frac'>
+			<a className='transition-ease dark-theme shadow-box round-2 w-frac group'>
 				<div className='relative flex items-center justify-between'>
 					<p className='w-fit text-lg line-clamp-1'>{title}</p>
 					<Image
