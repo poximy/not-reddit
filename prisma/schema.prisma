@@ -9,13 +9,15 @@ datasource db {
 }
 
 model Post {
-  id    String @id @default(dbgenerated()) @map("_id") @db.ObjectId
-  title String
-  text  String
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  title    String
+  text     String
+  comments Comment[]
 }
 
 model Comment {
-  id     String @id @default(dbgenerated()) @map("_id") @db.ObjectId
-  text   String
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
   postId String @db.ObjectId
+  Post   Post   @relation(fields: [postId], references: [id])
+  text   String
 }
