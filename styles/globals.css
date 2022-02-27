@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-	@apply m-4 bg-zinc-200 dark:bg-neutral-900;
-}
-
 .dark-theme {
 	@apply bg-white dark:bg-zinc-800 dark:text-zinc-200;
 }
