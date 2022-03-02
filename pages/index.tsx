@@ -4,6 +4,10 @@ import prisma from '@lib/prisma';
 import { Post } from '@prisma/client';
 import { NextPage } from 'next';
 import Head from 'next/head';
+import SignUpButton from '@components/Button/SignUpButton';
+
+import { useSession } from 'next-auth/react';
+import AuthButtons from '@components/Button/AuthButton';
 
 interface Props {
 	posts: Post[] | null;
@@ -30,17 +34,27 @@ export async function getServerSideProps() {
 }
 
 const Home: NextPage<Props> = ({ posts }) => {
+	const { data: session } = useSession();
 	return (
 		<>
 			<Head>
 				<title>Not Reddit</title>
 			</Head>
-			<div className='flex flex-col items-center gap-2'>
-				<CreatePostButton />
+			<div className='relative flex flex-col items-center gap-2'>
+				<div className='flex gap-2 md:absolute md:top-0 md:right-0 md:flex-col'>
+					{session ? (
+						<>
+							<CreatePostButton />
+						</>
+					) : (
+						<>
+							<AuthButtons />
+							<SignUpButton />
+						</>
+					)}
+				</div>
 				{posts === null ? (
-					<p className='round-2 shadow-box mt-4 bg-red-500'>
-						no posts available
-					</p>
+					<p className='round-2 shadow-box bg-red-500'>no posts available</p>
 				) : (
 					<>
 						{posts.map((post) => (
