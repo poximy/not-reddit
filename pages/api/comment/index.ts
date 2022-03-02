@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { getSession } from 'next-auth/react';
 
 interface CommentBody {
 	postId: string;
@@ -19,10 +20,11 @@ const validateReq = (body: any) => {
 	throw Error('Missing body fields');
 };
 
-const createComment = async ({ postId, text }: CommentBody) => {
+const createComment = async ({ postId, text }: CommentBody, userId: string) => {
 	const prisma = new PrismaClient();
 	return await prisma.comment.create({
 		data: {
+			userId,
 			text,
 			postId,
 		},
@@ -33,13 +35,17 @@ export default async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse
 ) {
-	if (req.method === 'POST') {
-		try {
-			const body = validateReq(req.body);
-			const comment = await createComment(body);
-			res.status(200).json(comment);
-		} catch (error) {
-			res.status(403).json({ error: error as string });
+	const session = await getSession({ req });
+	if (session) {
+		if (req.method === 'POST') {
+			try {
+				const body = validateReq(req.body);
+				const comment = await createComment(body, session.user.id);
+				res.status(200).json(comment);
+			} catch (error) {
+				res.status(403).json({ error: error as string });
+			}
 		}
 	}
+	res.status(404).json({ error: 'Not Authenticated' });
 }
