@@ -1,14 +1,11 @@
-import CreatePostButton from '@components/Button/CreatePostButton';
-import PostCard from '@components/Post/PostCard';
 import prisma from '@lib/prisma';
 import { Post } from '@prisma/client';
-import { NextPage } from 'next';
+
 import Head from 'next/head';
-import SignUpButton from '@components/Button/SignUpButton';
+import { NextPage } from 'next';
 
-import { useSession } from 'next-auth/react';
-import AuthButtons from '@components/Button/AuthButton';
-
+import NavBar from '@components/body/NavBar';
+import PostCard from '@components/Post/PostCard';
 interface Props {
 	posts: Post[] | null;
 }
@@ -34,27 +31,17 @@ export async function getServerSideProps() {
 }
 
 const Home: NextPage<Props> = ({ posts }) => {
-	const { data: session } = useSession();
 	return (
 		<>
 			<Head>
 				<title>Not Reddit</title>
 			</Head>
-			<div className='relative flex flex-col items-center gap-2'>
-				<div className='flex gap-2 md:absolute md:top-0 md:right-0 md:flex-col'>
-					{session ? (
-						<>
-							<CreatePostButton />
-						</>
-					) : (
-						<>
-							<AuthButtons />
-							<SignUpButton />
-						</>
-					)}
-				</div>
+			<div className='flex flex-col items-center gap-4'>
+				<NavBar />
 				{posts === null ? (
-					<p className='round-2 shadow-box bg-red-500'>no posts available</p>
+					<p className='round-2 shadow-box bg-reddit-orange'>
+						no posts available
+					</p>
 				) : (
 					<>
 						{posts.map((post) => (

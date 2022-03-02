@@ -1,13 +1,18 @@
-import Link from 'next/link';
 import { FC } from 'react';
+import { useRouter } from 'next/router';
 
 const SignUpButton: FC = () => {
+	const router = useRouter();
+
 	return (
-		<Link href='/auth/signup'>
-			<a className='transition-ease shadow-box w-20 rounded bg-blue-400 p-2 hover:scale-105'>
-				<p className='text-center'>Sign Up</p>
-			</a>
-		</Link>
+		<button
+			className='transition-ease shadow-box w-24 rounded-full bg-reddit-blue hover:scale-105 dark:bg-reddit-text-light'
+			onClick={() => router.push('/auth/signup')}
+		>
+			<p className='p-1 text-center font-bold text-reddit-text-light dark:text-reddit-body-dark'>
+				Sign Up
+			</p>
+		</button>
 	);
 };
 

@@ -7,22 +7,28 @@ const AuthButtons: FC = () => {
 		return (
 			<>
 				<button
-					className='shadow-bOx transition-ease w-20 rounded bg-red-400 p-2
-					text-center hover:scale-105'
+					className='transition-ease shadow-box w-24 rounded-full bg-reddit-blue
+					hover:scale-105 dark:bg-reddit-text-light'
 					onClick={() => signOut()}
 				>
-					Sign out
+					<p
+						className='p-1 text-center font-bold text-reddit-text-light
+						dark:text-reddit-body-dark'
+					>
+						Log Out
+					</p>
 				</button>
 			</>
 		);
 	}
 	return (
 		<button
-			className='transition-ease shadow-box w-20 rounded bg-green-400 p-2
-			hover:scale-105'
+			className='shadow-box transition-ease shadow-box w-24 rounded-full border-2 border-reddit-blue hover:scale-105 dark:border-reddit-text-light'
 			onClick={() => signIn()}
 		>
-			<p className='text-center'>Log In</p>
+			<p className='p-1 text-center font-bold text-reddit-blue dark:text-reddit-text-light'>
+				Log In
+			</p>
 		</button>
 	);
 };

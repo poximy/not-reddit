@@ -2,8 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-.dark-theme {
-	@apply bg-white dark:bg-zinc-800 dark:text-zinc-200;
+.dark-body {
+	@apply bg-reddit-body-light text-reddit-text-dark dark:bg-reddit-body-dark dark:text-reddit-text-light;
+}
+
+.border-body {
+	@apply border border-reddit-border-light dark:border-reddit-border-dark;
 }
 
 .shadow-box {
