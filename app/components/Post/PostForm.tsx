@@ -1,7 +1,9 @@
-import { FC, FormEvent } from 'react';
-import { useState } from 'react';
+import { FC, FormEvent, useState } from 'react';
+import { useRouter } from 'next/router';
 
 const PostForm: FC = () => {
+	const router = useRouter();
+
 	const [title, setTitle] = useState<string>('');
 	const [text, setText] = useState<string>('');
 	const [error, setError] = useState<string>('');
@@ -20,7 +22,7 @@ const PostForm: FC = () => {
 				},
 				body,
 			});
-			window.location.replace(res.url);
+			await router.push(res.url);
 		} catch (error) {
 			setError('Cannot create post :(');
 		}
@@ -60,7 +62,7 @@ const PostForm: FC = () => {
 					onChange={(e) => {
 						setText(e.target.value);
 					}}
-				></textarea>
+				/>
 				<input
 					className='shadow-box transition-ease round-2 bg-blue-400
 					font-medium hover:scale-105'

@@ -1,5 +1,6 @@
 import { FC, FormEvent } from 'react';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 interface Props {
 	postId: string;
@@ -9,8 +10,14 @@ const CommentForm: FC<Props> = ({ postId }) => {
 	const [commentText, setCommentText] = useState<string>('');
 	const [error, setError] = useState<string>('');
 
+	const router = useRouter();
+
 	const createComment = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
+		if (commentText === '') {
+			setError('Cannot create empty comment');
+			return;
+		}
 		const url = window.location.origin + '/api/comment';
 		const body = JSON.stringify({ postId, text: commentText });
 		setError('');
@@ -23,7 +30,7 @@ const CommentForm: FC<Props> = ({ postId }) => {
 				},
 				body,
 			});
-			location.reload();
+			router.reload();
 		} catch (error) {
 			setError('Cannot create comment :(');
 		}
