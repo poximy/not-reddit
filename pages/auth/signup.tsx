@@ -44,7 +44,7 @@ const SignUp: NextPage = () => {
 			{error === '' ? (
 				''
 			) : (
-				<p className='rounded bg-red-400 p-2 text-black'>{error}</p>
+				<p className='rounded bg-reddit-orange p-2 text-black'>{error}</p>
 			)}
 			<input
 				className='shadow-box rounded px-2 py-1 focus:outline-none'

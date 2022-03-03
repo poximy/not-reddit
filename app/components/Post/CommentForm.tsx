@@ -61,7 +61,7 @@ const CommentForm: FC<Props> = ({ postId }) => {
 			</form>
 			{error !== '' ? (
 				<div className='flex justify-center'>
-					<p className='max-w-fit rounded bg-red-400 p-2'>{error}</p>
+					<p className='max-w-fit rounded bg-reddit-orange p-2'>{error}</p>
 				</div>
 			) : (
 				''
