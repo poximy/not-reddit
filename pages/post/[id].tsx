@@ -1,10 +1,14 @@
-import CommentForm from '@components/Post/CommentForm';
 import prisma from '@lib/prisma';
 import { Comment, Post } from '@prisma/client';
-import { GetServerSideProps, NextPage } from 'next';
+
+import { FC } from 'react';
 import Head from 'next/head';
+import { GetServerSideProps, NextPage } from 'next';
+
 import { ParsedUrlQuery } from 'node:querystring';
 
+import NavBar from '@components/body/NavBar';
+import CommentForm from '@components/Post/CommentForm';
 interface Props {
 	post: Post | null;
 	comments: Comment[] | null;
@@ -66,6 +70,43 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 	};
 };
 
+const PostTitleText: FC<{ title: string; text: string }> = ({
+	title,
+	text,
+}) => {
+	return (
+		<>
+			<p className='dark-body border-body round-2 w-full'>{title}</p>
+			{text !== '' ? (
+				<p className='dark-body round-2 border-body w-full'>{text}</p>
+			) : (
+				''
+			)}
+		</>
+	);
+};
+
+const Comments: FC<{ comments: Comment[] | null }> = ({ comments }) => {
+	return (
+		<>
+			{comments === null || comments.length === 0 ? (
+				<p className='dark-body round-2 border-body text-center'>No Comments</p>
+			) : (
+				<>
+					{comments.map((comment) => (
+						<p
+							key={comment.id}
+							className='border-body dark-body round-2 w-full'
+						>
+							{comment.text}
+						</p>
+					))}
+				</>
+			)}
+		</>
+	);
+};
+
 const PostID: NextPage<Props> = ({ post, comments }) => {
 	return (
 		<>
@@ -75,42 +116,18 @@ const PostID: NextPage<Props> = ({ post, comments }) => {
 				</title>
 			</Head>
 			<div className='flex justify-center'>
-				<div className='transition-ease w-frac flex flex-col gap-2'>
+				{/* Parrent div so w-frac can work correctly */}
+				<div className='transition-ease w-frac flex flex-col gap-4'>
+					<NavBar />
 					{post === null ? (
-						<p className='shadow-box round-2 bg-red-500'>
+						<p className='shadow-box round-2 bg-reddit-orange'>
 							Error post was not found
 						</p>
 					) : (
 						<>
-							<p className='shadow-box dark-theme round-2 w-full'>
-								{post.title}
-							</p>
-							{post.text !== '' ? (
-								<p className='shadow-box dark-theme round-2 w-full'>
-									{post.text}
-								</p>
-							) : (
-								''
-							)}
-							<br />
-							{/* Comment Section */}
+							<PostTitleText title={post.title} text={post.text} />
 							<CommentForm postId={post.id} />
-							{comments === null || comments.length === 0 ? (
-								<p className='shadow-box dark-theme round-2 text-center'>
-									No Comments
-								</p>
-							) : (
-								<>
-									{comments.map((comment) => (
-										<p
-											key={comment.id}
-											className='shadow-box dark-theme round-2 w-full'
-										>
-											{comment.text}
-										</p>
-									))}
-								</>
-							)}
+							<Comments comments={comments} />
 						</>
 					)}
 				</div>

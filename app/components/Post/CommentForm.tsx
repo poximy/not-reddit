@@ -41,7 +41,7 @@ const CommentForm: FC<Props> = ({ postId }) => {
 			<form
 				id='comment-section'
 				onSubmit={createComment}
-				className='flex w-full'
+				className='border-body flex w-full rounded'
 			>
 				<textarea
 					placeholder='What are your thoughts?'
@@ -49,14 +49,14 @@ const CommentForm: FC<Props> = ({ postId }) => {
 					rows={1}
 					cols={80}
 					onChange={(event) => setCommentText(event.target.value)}
-					className='border-box shadow-box dark-theme h-fit w-full rounded-l p-2
+					className='border-box shadow-box dark-body h-fit w-full rounded-l p-2
 					font-mono focus-visible:outline-none'
 				/>
 				<input
 					type='submit'
 					value='Comment'
-					className='shadow-box transition-ease z-10 rounded-r bg-blue-400 p-2
-					font-medium hover:scale-105'
+					className='shadow-box transition-ease rounded-r bg-reddit-orange p-2
+					font-medium text-reddit-text-dark hover:scale-105'
 				/>
 			</form>
 			{error !== '' ? (
