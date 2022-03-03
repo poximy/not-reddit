@@ -3,6 +3,8 @@ import { Comment, Post } from '@prisma/client';
 
 import { FC } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 import { GetServerSideProps, NextPage } from 'next';
 
 import { ParsedUrlQuery } from 'node:querystring';
@@ -108,6 +110,7 @@ const Comments: FC<{ comments: Comment[] | null }> = ({ comments }) => {
 };
 
 const PostID: NextPage<Props> = ({ post, comments }) => {
+	const session = useSession();
 	return (
 		<>
 			<Head>
@@ -126,7 +129,23 @@ const PostID: NextPage<Props> = ({ post, comments }) => {
 					) : (
 						<>
 							<PostTitleText title={post.title} text={post.text} />
-							<CommentForm postId={post.id} />
+							{/* Renders Form only if user is signed in */}
+							{session ? (
+								<div className='dark-body'>
+									<Link href='/auth/login'>
+										<a>
+											<p
+												className='p-2 text-center text-reddit-text-dark
+											dark:text-reddit-text-light'
+											>
+												Log In To Comment
+											</p>
+										</a>
+									</Link>
+								</div>
+							) : (
+								<CommentForm postId={post.id} />
+							)}
 							<Comments comments={comments} />
 						</>
 					)}

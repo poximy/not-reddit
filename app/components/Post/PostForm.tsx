@@ -28,22 +28,19 @@ const PostForm: FC = () => {
 		}
 	};
 
-	const displayError =
-		error === '' ? (
-			''
-		) : (
-			<p className='round-2 w-max bg-red-500 font-medium'>
-				Error Cannot Create Post
-			</p>
-		);
-
 	return (
 		<>
-			{displayError}
-			<form onSubmit={createPost} className='flex flex-col gap-2'>
+			{error === '' ? (
+				''
+			) : (
+				<p className='round-2 w-max bg-reddit-orange font-medium text-reddit-text-dark'>
+					Error Cannot Create Post
+				</p>
+			)}
+			<form onSubmit={createPost} className='flex flex-col gap-4'>
 				<input
-					className='shadow-box dark-theme round-2 w-full font-mono text-xl
-					focus-visible:outline-none'
+					className='shadow-box dark-body round-2 border-body w-full font-mono
+					text-xl focus-visible:outline-none'
 					type='text'
 					placeholder='Title'
 					value={title}
@@ -53,8 +50,8 @@ const PostForm: FC = () => {
 					}}
 				/>
 				<textarea
-					className='border-box dark-theme shadow-box round-2 w-full font-mono
-					text-lg focus-visible:outline-none'
+					className='border-box dark-body border-body shadow-box round-2 w-full
+					font-mono text-lg focus-visible:outline-none'
 					placeholder='Text (optional)'
 					value={text}
 					rows={10}
@@ -64,8 +61,9 @@ const PostForm: FC = () => {
 					}}
 				/>
 				<input
-					className='shadow-box transition-ease round-2 bg-blue-400
-					font-medium hover:scale-105'
+					className='transition-ease rounded-full border-2 border-reddit-orange
+					p-2 text-lg font-bold text-reddit-orange hover:scale-[1.025]
+					dark:border-reddit-light-gray dark:text-reddit-text-light'
 					type='submit'
 					value='Post'
 				/>

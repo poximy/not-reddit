@@ -41,9 +41,12 @@ export default async function handler(
 			try {
 				const body = validateReq(req.body);
 				const comment = await createComment(body, session.user.id);
+
 				res.status(200).json(comment);
+				return
 			} catch (error) {
 				res.status(403).json({ error: error as string });
+				return
 			}
 		}
 	}

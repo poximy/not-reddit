@@ -1,49 +1,64 @@
+import Link from 'next/link';
 import { getCsrfToken } from 'next-auth/react';
 import { GetServerSideProps, NextPage } from 'next';
-import SignUpButton from '@components/Button/SignUpButton';
+import NavBar from '@components/body/NavBar';
 
 interface Props {
 	csrfToken: string;
 }
 
 const LogIn: NextPage<Props> = ({ csrfToken }) => {
+	// Add signup text instead of button
 	return (
-		<div className='flex flex-col items-center gap-2'>
-			<SignUpButton />
-			<form
-				className='dark-theme shadow-box flex max-h-48 max-w-min flex-col items-center
-				gap-2 rounded bg-zinc-800 p-2'
-				method='post'
-				action='/api/auth/callback/credentials'
-			>
-				<input name='csrfToken' type='hidden' defaultValue={csrfToken} />
-
-				<label className='flex max-w-min flex-col'>
-					Username
-					<input
-						className='shadow-box rounded px-2 py-1 text-black focus:outline-none'
-						name='username'
-						type='text'
-					/>
-				</label>
-
-				<label className='flex max-w-min flex-col'>
-					Password
-					<input
-						className='shadow-box rounded px-2 py-1 text-black focus:outline-none'
-						name='password'
-						type='password'
-					/>
-				</label>
-
-				<button
-					className='transition-ease shadow-box w-20 rounded bg-green-300 p-2 text-black hover:scale-105'
-					type='submit'
+		<>
+			<div className='flex flex-col items-center justify-center gap-4'>
+				<NavBar />
+				<form
+					className='dark-body border-body flex max-w-min flex-col
+					items-center gap-4 rounded p-4 text-reddit-text-dark
+					dark:text-reddit-text-light '
+					method='post'
+					action='/api/auth/callback/credentials'
 				>
-					<p className='text-center'>Log In</p>
-				</button>
-			</form>
-		</div>
+					<input name='csrfToken' type='hidden' defaultValue={csrfToken} />
+
+					<label className='flex max-w-min flex-col gap-2 font-medium'>
+						Username
+						<input
+							className='border-body dark-body rounded px-2 py-1 focus:outline-none'
+							name='username'
+							type='text'
+						/>
+					</label>
+
+					<label className='flex max-w-min flex-col gap-2 font-medium'>
+						Password
+						<input
+							className='border-body dark-body rounded px-2 py-1 focus:outline-none'
+							name='password'
+							type='password'
+						/>
+					</label>
+
+					<button
+						className='transition-ease w-24 rounded-full border-2 border-reddit-blue
+					p-2 hover:scale-105 dark:border-reddit-text-light'
+						type='submit'
+					>
+						<p className='text-center font-bold text-reddit-blue dark:text-reddit-text-light'>
+							Log In
+						</p>
+					</button>
+					<Link href='/auth/signup'>
+						<a>
+							<p className='text-sm text-reddit-text-dark dark:text-reddit-text-light'>
+								Create an account
+							</p>
+						</a>
+					</Link>
+				</form>
+			</div>
+		</>
 	);
 };
 

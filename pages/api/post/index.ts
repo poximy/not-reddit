@@ -35,8 +35,10 @@ export default async function handler(
 				const post = await createPost(body, session.user.id);
 
 				res.redirect(301, `/post/${post.id}`);
+				return;
 			} catch (error) {
 				res.status(403).json({ error: error as string });
+				return
 			}
 		}
 	}
