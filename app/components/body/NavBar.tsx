@@ -42,7 +42,7 @@ const NavBar: FC = () => {
 	}
 
 	return (
-		<div className='border-body dark-body rounded p-2'>
+		<div className='border-body dark-body w-full rounded p-2'>
 			<Link href='/'>
 				<a className='min-w-fit cursor-pointer'>
 					<p className='text-center text-2xl font-bold'>Not-Reddit</p>

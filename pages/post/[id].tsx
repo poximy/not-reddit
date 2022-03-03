@@ -115,10 +115,10 @@ const PostID: NextPage<Props> = ({ post, comments }) => {
 					{post !== null ? post.title : 'Post not found'} - Not Reddit
 				</title>
 			</Head>
-			<div className='flex justify-center'>
+			<div className='flex flex-col items-center gap-4'>
 				{/* Parrent div so w-frac can work correctly */}
+				<NavBar />
 				<div className='transition-ease w-frac flex flex-col gap-4'>
-					<NavBar />
 					{post === null ? (
 						<p className='shadow-box round-2 bg-reddit-orange'>
 							Error post was not found
