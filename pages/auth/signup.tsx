@@ -40,7 +40,7 @@ const SignUp: NextPage = () => {
 		<div className='flex flex-col items-center gap-4'>
 			<NavBar />
 			<form
-				className='dark-body border-body flex max-w-fit flex-col gap-4 rounded bg-white p-2'
+				className='dark-body border-body flex max-w-fit flex-col gap-4 rounded bg-white p-4'
 				onSubmit={createUser}
 			>
 				{/* Verifies if no error is present */}
