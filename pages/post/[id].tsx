@@ -119,7 +119,7 @@ const PostID: NextPage<Props> = ({ post, comments }) => {
 				</title>
 			</Head>
 			<div className='flex flex-col items-center gap-4'>
-				{/* Parrent div so w-frac can work correctly */}
+				{/* Parent div so w-frac can work correctly */}
 				<NavBar />
 				<div className='transition-ease w-frac flex flex-col gap-4'>
 					{post === null ? (
@@ -129,7 +129,7 @@ const PostID: NextPage<Props> = ({ post, comments }) => {
 					) : (
 						<>
 							<PostTitleText title={post.title} text={post.text} />
-							{/* Renders Form only if user is signed in */}
+							{/* Renders Form only if a user is signed in */}
 							{session ? (
 								<div className='dark-body'>
 									<Link href='/auth/login'>
