@@ -11,6 +11,7 @@ import { ParsedUrlQuery } from 'node:querystring';
 
 import NavBar from '@components/body/NavBar';
 import CommentForm from '@components/Post/CommentForm';
+
 interface Props {
 	post: Post | null;
 	comments: Comment[] | null;
@@ -27,13 +28,11 @@ const validateParams = (params: ParsedUrlQuery | undefined) => {
 
 const findPost = async (id: string) => {
 	try {
-		const post = await prisma.post.findUnique({
+		return await prisma.post.findUnique({
 			where: {
 				id,
 			},
 		});
-
-		return post;
 	} catch (error) {
 		return null;
 	}
