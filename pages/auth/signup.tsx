@@ -29,7 +29,7 @@ const SignUp: NextPage = () => {
 				setError('Name already in use');
 			} else {
 				setError('');
-				router.push(res.url);
+				await router.push(res.url);
 			}
 		} catch (error) {
 			setError('error');

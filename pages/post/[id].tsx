@@ -11,6 +11,7 @@ import { ParsedUrlQuery } from 'node:querystring';
 
 import NavBar from '@components/body/NavBar';
 import CommentForm from '@components/Post/CommentForm';
+
 interface Props {
 	post: Post | null;
 	comments: Comment[] | null;
@@ -27,13 +28,11 @@ const validateParams = (params: ParsedUrlQuery | undefined) => {
 
 const findPost = async (id: string) => {
 	try {
-		const post = await prisma.post.findUnique({
+		return await prisma.post.findUnique({
 			where: {
 				id,
 			},
 		});
-
-		return post;
 	} catch (error) {
 		return null;
 	}
@@ -119,7 +118,7 @@ const PostID: NextPage<Props> = ({ post, comments }) => {
 				</title>
 			</Head>
 			<div className='flex flex-col items-center gap-4'>
-				{/* Parrent div so w-frac can work correctly */}
+				{/* Parent div so w-frac can work correctly */}
 				<NavBar />
 				<div className='transition-ease w-frac flex flex-col gap-4'>
 					{post === null ? (
@@ -129,7 +128,7 @@ const PostID: NextPage<Props> = ({ post, comments }) => {
 					) : (
 						<>
 							<PostTitleText title={post.title} text={post.text} />
-							{/* Renders Form only if user is signed in */}
+							{/* Renders Form only if a user is signed in */}
 							{session ? (
 								<div className='dark-body'>
 									<Link href='/auth/login'>

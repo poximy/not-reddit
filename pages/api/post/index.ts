@@ -38,7 +38,7 @@ export default async function handler(
 				return;
 			} catch (error) {
 				res.status(403).json({ error: error as string });
-				return
+				return;
 			}
 		}
 	}

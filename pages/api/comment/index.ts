@@ -43,10 +43,10 @@ export default async function handler(
 				const comment = await createComment(body, session.user.id);
 
 				res.status(200).json(comment);
-				return
+				return;
 			} catch (error) {
 				res.status(403).json({ error: error as string });
-				return
+				return;
 			}
 		}
 	}
