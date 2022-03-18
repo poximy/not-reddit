@@ -110,6 +110,8 @@ const Comments: FC<{ comments: Comment[] | null }> = ({ comments }) => {
 
 const PostID: NextPage<Props> = ({ post, comments }) => {
 	const session = useSession();
+	console.log(session);
+
 	return (
 		<>
 			<Head>
@@ -129,7 +131,7 @@ const PostID: NextPage<Props> = ({ post, comments }) => {
 						<>
 							<PostTitleText title={post.title} text={post.text} />
 							{/* Renders Form only if a user is signed in */}
-							{session ? (
+							{session.data === null ? (
 								<div className='dark-body'>
 									<Link href='/auth/login'>
 										<a>
