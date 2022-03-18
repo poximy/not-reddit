@@ -110,8 +110,6 @@ const Comments: FC<{ comments: Comment[] | null }> = ({ comments }) => {
 
 const PostID: NextPage<Props> = ({ post, comments }) => {
 	const session = useSession();
-	console.log(session);
-
 	return (
 		<>
 			<Head>
