@@ -87,7 +87,23 @@ const PostTitleText: FC<{ title: string; text: string }> = ({
 	);
 };
 
-const Comments: FC<{ comments: Comment[] | null }> = ({ comments }) => {
+const deleteComment = async function (commentId: string) {
+	const url = window.location.origin + '/api/comment';
+	const body = JSON.stringify({ commentId });
+	await fetch(url, {
+		method: 'DELETE',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body,
+	});
+};
+
+const Comments: FC<{
+	comments: Comment[] | null;
+	userId: string | undefined;
+}> = function ({ comments, userId }) {
+	// FIXME remove comment on delete
 	return (
 		<>
 			{comments === null || comments.length === 0 ? (
@@ -95,12 +111,23 @@ const Comments: FC<{ comments: Comment[] | null }> = ({ comments }) => {
 			) : (
 				<>
 					{comments.map((comment) => (
-						<p
-							key={comment.id}
-							className='border-body dark-body round-2 w-full'
-						>
-							{comment.text}
-						</p>
+						<div key={comment.id} className='group relative'>
+							<p className='border-body dark-body round-2 w-full'>
+								{comment.text}
+							</p>
+							{userId && userId === comment.userId ? (
+								<button
+									onClick={() => deleteComment(comment.id)}
+									className='absolute top-0 right-0 h-8 w-8 rounded-b rounded-tr
+									bg-reddit-orange p-2 font-bold leading-none opacity-0
+									group-hover:opacity-100'
+								>
+									X
+								</button>
+							) : (
+								''
+							)}
+						</div>
 					))}
 				</>
 			)}
@@ -135,7 +162,7 @@ const PostID: NextPage<Props> = ({ post, comments }) => {
 										<a>
 											<p
 												className='p-2 text-center text-reddit-text-dark
-											dark:text-reddit-text-light'
+												dark:text-reddit-text-light'
 											>
 												Log In To Comment
 											</p>
@@ -145,7 +172,7 @@ const PostID: NextPage<Props> = ({ post, comments }) => {
 							) : (
 								<CommentForm postId={post.id} />
 							)}
-							<Comments comments={comments} />
+							<Comments comments={comments} userId={session.data?.user.id} />
 						</>
 					)}
 				</div>
