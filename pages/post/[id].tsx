@@ -18,7 +18,7 @@ interface Props {
 	comments: Comment[] | null;
 }
 
-const validateParams = (params: ParsedUrlQuery | undefined) => {
+const validateParams = function (params: ParsedUrlQuery | undefined) {
 	if (params !== undefined) {
 		if ('id' in params) {
 			return params.id as string;
@@ -27,7 +27,7 @@ const validateParams = (params: ParsedUrlQuery | undefined) => {
 	return null;
 };
 
-const findPost = async (id: string) => {
+const findPost = async function (id: string) {
 	try {
 		return await prisma.post.findUnique({
 			where: {
@@ -39,7 +39,7 @@ const findPost = async (id: string) => {
 	}
 };
 
-const findComments = async (postId: string) => {
+const findComments = async function (postId: string) {
 	try {
 		const comments = await prisma.comment.findMany({
 			where: {
