@@ -14,7 +14,7 @@ import NavBar from '@components/body/NavBar';
 import CommentForm from '@components/Post/CommentForm';
 
 interface Props {
-	post: Post | null;
+	post: (Post & { User: { username: string } }) | null;
 	comments: Comment[] | null;
 }
 
@@ -32,6 +32,13 @@ const findPost = async function (id: string) {
 		return await prisma.post.findUnique({
 			where: {
 				id,
+			},
+			include: {
+				User: {
+					select: {
+						username: true,
+					},
+				},
 			},
 		});
 	} catch (error) {
@@ -72,10 +79,19 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 	};
 };
 
-const PostTitle: FC<{ title: string; text: string }> = ({ title, text }) => {
+const PostTitle: FC<{ title: string; text: string; username: string }> = ({
+	title,
+	text,
+	username,
+}) => {
 	return (
 		<>
-			<p className='dark-body border-body round-2 w-full'>{title}</p>
+			<div className='flex flex-row gap-2 justify-between items-center dark-body border-body round-2 w-full'>
+				<p className='w-fit line-clamp-1'>{title}</p>
+				<p className='text-reddit-text-dark/25 dark:text-reddit-text-light/25'>
+					Posted by: {username}
+				</p>
+			</div>
 			{text !== '' ? (
 				<p className='dark-body round-2 border-body w-full'>{text}</p>
 			) : (
@@ -158,7 +174,11 @@ const PostID: NextPage<Props> = ({ post, comments }) => {
 						</p>
 					) : (
 						<>
-							<PostTitle title={post.title} text={post.text} />
+							<PostTitle
+								title={post.title}
+								text={post.text}
+								username={post.User.username}
+							/>
 							{/* Renders Form only if a user is signed in */}
 							{session.data === null ? (
 								<div className='dark-body'>
