@@ -4,6 +4,7 @@ import { Comment, Post } from '@prisma/client';
 import { FC } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { GetServerSideProps, NextPage } from 'next';
 
@@ -103,7 +104,13 @@ const Comments: FC<{
 	comments: Comment[] | null;
 	userId: string | undefined;
 }> = function ({ comments, userId }) {
-	// FIXME remove comment on delete
+	const router = useRouter();
+
+	const deleteButtonHandler = function (commentId: string) {
+		deleteComment(commentId);
+		setTimeout(router.reload, 1000);
+	};
+
 	return (
 		<>
 			{comments === null || comments.length === 0 ? (
@@ -117,7 +124,7 @@ const Comments: FC<{
 							</p>
 							{userId && userId === comment.userId ? (
 								<button
-									onClick={() => deleteComment(comment.id)}
+									onClick={() => deleteButtonHandler(comment.id)}
 									className='absolute top-0 right-0 h-8 w-8 rounded-b rounded-tr
 									bg-reddit-orange p-2 font-bold leading-none opacity-0
 									group-hover:opacity-100'
