@@ -72,10 +72,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 	};
 };
 
-const PostTitleText: FC<{ title: string; text: string }> = ({
-	title,
-	text,
-}) => {
+const PostTitle: FC<{ title: string; text: string }> = ({ title, text }) => {
 	return (
 		<>
 			<p className='dark-body border-body round-2 w-full'>{title}</p>
@@ -161,7 +158,7 @@ const PostID: NextPage<Props> = ({ post, comments }) => {
 						</p>
 					) : (
 						<>
-							<PostTitleText title={post.title} text={post.text} />
+							<PostTitle title={post.title} text={post.text} />
 							{/* Renders Form only if a user is signed in */}
 							{session.data === null ? (
 								<div className='dark-body'>
