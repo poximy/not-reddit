@@ -13,9 +13,12 @@ import { ParsedUrlQuery } from 'node:querystring';
 import NavBar from '@components/body/NavBar';
 import CommentForm from '@components/Post/CommentForm';
 
+type PostProp = (Post & { User: { username: string } }) | null;
+type CommentProp = (Comment & { User: { username: string } })[] | null;
+
 interface Props {
-	post: (Post & { User: { username: string } }) | null;
-	comments: Comment[] | null;
+	post: PostProp;
+	comments: CommentProp;
 }
 
 const validateParams = function (params: ParsedUrlQuery | undefined) {
@@ -53,6 +56,13 @@ const findComments = async function (postId: string) {
 				postId,
 			},
 			take: -16,
+			include: {
+				User: {
+					select: {
+						username: true,
+					},
+				},
+			},
 		});
 		return comments.reverse();
 	} catch (error) {
@@ -114,7 +124,7 @@ const deleteComment = async function (commentId: string) {
 };
 
 const Comments: FC<{
-	comments: Comment[] | null;
+	comments: CommentProp;
 	userId: string | undefined;
 }> = function ({ comments, userId }) {
 	const router = useRouter();
@@ -132,6 +142,12 @@ const Comments: FC<{
 				<>
 					{comments.map((comment) => (
 						<div key={comment.id} className='group relative'>
+							<p
+								className='absolute -top-6 p-2 text-white px-2 text-xs
+								text-reddit-text-dark/50 dark:text-reddit-text-light/50'
+							>
+								u/{comment.User.username}
+							</p>
 							<p className='border-body dark-body round-2 w-full'>
 								{comment.text}
 							</p>
