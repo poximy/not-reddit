@@ -88,8 +88,8 @@ const PostTitle: FC<{ title: string; text: string; username: string }> = ({
 		<>
 			<div className='flex flex-row gap-2 justify-between items-center dark-body border-body round-2 w-full'>
 				<p className='w-fit line-clamp-1'>{title}</p>
-				<p className='text-reddit-text-dark/25 dark:text-reddit-text-light/25'>
-					Posted by: {username}
+				<p className='text-reddit-text-dark/50 dark:text-reddit-text-light/50'>
+					Posted By: {username}
 				</p>
 			</div>
 			{text !== '' ? (
