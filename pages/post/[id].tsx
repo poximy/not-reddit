@@ -201,8 +201,8 @@ const PostID: NextPage<Props> = ({ post, comments }) => {
 									<Link href='/auth/login'>
 										<a>
 											<p
-												className='p-2 text-center text-reddit-text-dark
-												dark:text-reddit-text-light'
+												className='text-center text-reddit-text-dark
+												dark:text-reddit-text-light border-body round-2'
 											>
 												Log In To Comment
 											</p>
