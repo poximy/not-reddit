@@ -49,14 +49,14 @@ const CommentForm: FC<Props> = ({ postId }) => {
 					rows={1}
 					cols={80}
 					onChange={(event) => setCommentText(event.target.value)}
-					className='border-box shadow-box dark-body h-fit w-full rounded-l p-2
-					font-mono focus-visible:outline-none'
+					className='border-box dark-body h-fit w-full rounded-l p-2 font-mono
+					focus-visible:outline-none'
 				/>
 				<input
 					type='submit'
 					value='Comment'
-					className='shadow-box transition-ease rounded-r bg-reddit-orange p-2
-					font-medium text-reddit-text-dark hover:scale-105'
+					className='transition-ease rounded-r bg-reddit-orange p-2 font-medium
+					text-reddit-text-dark hover:scale-105'
 				/>
 			</form>
 			{error !== '' ? (
