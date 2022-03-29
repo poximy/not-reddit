@@ -2,7 +2,7 @@ import prisma from '@lib/prisma';
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
-const getUserCredentials = async (username: string) => {
+const getUserCredentials = async function (username: string) {
 	return await prisma.user.findUnique({
 		where: {
 			username,

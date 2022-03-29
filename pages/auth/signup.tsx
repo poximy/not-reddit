@@ -11,7 +11,7 @@ const SignUp: NextPage = () => {
 
 	const [error, setError] = useState('');
 
-	const createUser = async (event: FormEvent<HTMLFormElement>) => {
+	const createUser = async function (event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 		const signUpUrl = window.location.origin + '/api/auth/signup';
 		const body = JSON.stringify({ password, username });

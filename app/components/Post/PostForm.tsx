@@ -8,7 +8,7 @@ const PostForm: FC = () => {
 	const [text, setText] = useState<string>('');
 	const [error, setError] = useState<string>('');
 
-	const createPost = async (event: FormEvent<HTMLFormElement>) => {
+	const createPost = async function (event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 		const url = window.location.origin + '/api/post';
 		const body = JSON.stringify({ title, text });

@@ -6,7 +6,7 @@ interface Body {
 	password: string;
 }
 
-const validateReq = (body: any) => {
+const validateReqBody = function (body: any) {
 	if ('username' in body && 'password' in body) {
 		if (typeof body.username == 'string' && typeof body.password === 'string') {
 			return body as Body;
@@ -16,7 +16,7 @@ const validateReq = (body: any) => {
 	throw Error('Missing body fields');
 };
 
-const createUser = async ({ username, password }: Body) => {
+const createUser = async function ({ username, password }: Body) {
 	// Creates user if not already in the database
 	const userExists = await prisma.user.findUnique({
 		where: {
@@ -47,7 +47,7 @@ export default async function handler(
 ) {
 	if (req.method === 'POST') {
 		try {
-			const body = validateReq(req.body);
+			const body = validateReqBody(req.body);
 			await createUser(body);
 			res.redirect(301, `/auth/login`);
 		} catch (error) {

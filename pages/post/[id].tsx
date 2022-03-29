@@ -21,7 +21,7 @@ interface Props {
 	comments: CommentProp;
 }
 
-const validateParams = function (params: ParsedUrlQuery | undefined) {
+const validateUrlQueryParams = function (params: ParsedUrlQuery | undefined) {
 	if (params !== undefined) {
 		if ('id' in params) {
 			return params.id as string;
@@ -71,7 +71,7 @@ const findComments = async function (postId: string) {
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-	const id = validateParams(params);
+	const id = validateUrlQueryParams(params);
 	if (id === null) {
 		return {
 			props: {
