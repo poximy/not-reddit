@@ -1,6 +1,7 @@
 import prisma from '@lib/prisma';
 import { Post } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
+
 import { getSession } from 'next-auth/react';
 
 const validateReq = (body: any) => {

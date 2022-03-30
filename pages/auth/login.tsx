@@ -1,6 +1,8 @@
 import Link from 'next/link';
-import { getCsrfToken } from 'next-auth/react';
 import { GetServerSideProps, NextPage } from 'next';
+
+import { getCsrfToken } from 'next-auth/react';
+
 import NavBar from '@components/body/NavBar';
 
 interface Props {

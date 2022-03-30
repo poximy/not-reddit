@@ -6,6 +6,7 @@ import { NextPage } from 'next';
 
 import NavBar from '@components/body/NavBar';
 import PostCard from '@components/Post/PostCard';
+
 interface Props {
 	posts: Post[] | null;
 }

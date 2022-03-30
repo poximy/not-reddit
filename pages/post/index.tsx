@@ -1,7 +1,8 @@
+import Head from 'next/head';
+import { NextPage } from 'next';
+
 import NavBar from '@components/body/NavBar';
 import PostForm from '@components/Post/PostForm';
-import { NextPage } from 'next';
-import Head from 'next/head';
 
 const Post: NextPage = () => {
 	return (

@@ -1,7 +1,8 @@
-import NavBar from '@components/body/NavBar';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { FormEvent, useState } from 'react';
+
+import NavBar from '@components/body/NavBar';
 
 const SignUp: NextPage = () => {
 	const router = useRouter();
