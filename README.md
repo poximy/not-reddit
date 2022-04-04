@@ -1,6 +1,6 @@
 # Not Reddit
 
-This is not a reddit clone i made for fun :)
+This is not a reddit clone I made for fun :)
 
 Not-Reddit lets you view / create post & comment. More features to come next!
 
