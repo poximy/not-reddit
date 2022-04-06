@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 module.exports = {
 	content: [
 		'./pages/**/*.{js,ts,jsx,tsx}',
@@ -5,6 +7,9 @@ module.exports = {
 	],
 	theme: {
 		extend: {
+			fontFamily: {
+				'ibm-sans': ['IBM Plex Sans', ...defaultTheme.fontFamily.sans],
+			},
 			maxWidth: {
 				'4/5': '80%',
 				'2/3': 'calc(2 / 3 * 100%)',
