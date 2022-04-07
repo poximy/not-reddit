@@ -6,7 +6,8 @@ const SignUpButton: FC = () => {
 
   return (
     <button
-      className='transition-ease shadow-box w-24 rounded-full bg-reddit-blue hover:scale-105 dark:bg-reddit-text-light'
+      className='transition-ease shadow-box w-24 rounded-full bg-reddit-blue
+      hover:scale-105 dark:bg-reddit-text-light'
       onClick={() => router.push('/auth/signup')}
     >
       <p className='p-1 text-center font-bold text-reddit-text-light dark:text-reddit-body-dark'>
