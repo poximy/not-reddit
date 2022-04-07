@@ -3,25 +3,25 @@
 @tailwind utilities;
 
 .dark-body {
-	@apply bg-reddit-body-light text-reddit-text-dark dark:bg-reddit-body-dark dark:text-reddit-text-light;
+  @apply bg-reddit-body-light text-reddit-text-dark dark:bg-reddit-body-dark dark:text-reddit-text-light;
 }
 
 .border-body {
-	@apply border border-reddit-border-light dark:border-reddit-border-dark;
+  @apply border border-reddit-border-light dark:border-reddit-border-dark;
 }
 
 .shadow-box {
-	@apply shadow shadow-black/25;
+  @apply shadow shadow-black/25;
 }
 
 .round-2 {
-	@apply rounded p-2;
+  @apply rounded p-2;
 }
 
 .transition-ease {
-	@apply transition-all ease-linear;
+  @apply transition-all ease-linear;
 }
 
 .w-frac {
-	@apply w-full sm:max-w-4/5 md:max-w-3/4 lg:max-w-2/3;
+  @apply w-full sm:max-w-4/5 md:max-w-3/4 lg:max-w-2/3;
 }
