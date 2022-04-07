@@ -208,12 +208,12 @@ const PostID: NextPage<Props> = ({ post, comments }) => {
 							/>
 							{/* Renders Form only if a user is signed in */}
 							{session.data === null ? (
-								<div className='dark-body'>
+								<div className='dark-body rounded border-body'>
 									<Link href='/auth/login'>
 										<a>
 											<p
-												className='text-center text-reddit-text-dark
-												dark:text-reddit-text-light border-body round-2'
+												className='p-2 text-center text-reddit-text-dark
+												dark:text-reddit-text-light'
 											>
 												Log In To Comment
 											</p>
