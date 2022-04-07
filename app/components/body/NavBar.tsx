@@ -17,7 +17,7 @@ const NavBar: FC = () => {
 		return (
 			<div
 				className='border-body dark-body flex w-full flex-wrap items-center
-			justify-around gap-2 rounded p-2 sm:justify-between'
+				justify-around gap-2 rounded p-2 sm:justify-between'
 			>
 				<Link href='/'>
 					<a className='min-w-fit cursor-pointer'>

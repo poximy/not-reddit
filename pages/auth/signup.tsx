@@ -66,8 +66,8 @@ const SignUp: NextPage = () => {
 				/>
 				<input
 					className='transition-ease rounded-full bg-reddit-blue p-2 font-bold
-				text-reddit-text-light hover:scale-[1.025] dark:bg-reddit-body-light
-				dark:text-reddit-text-dark'
+					text-reddit-text-light hover:scale-[1.025] dark:bg-reddit-body-light
+					dark:text-reddit-text-dark'
 					type='submit'
 					value='Sign Up'
 				/>

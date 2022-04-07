@@ -44,7 +44,7 @@ const LogIn: NextPage<Props> = ({ csrfToken }) => {
 
 					<button
 						className='transition-ease w-24 rounded-full border-2 border-reddit-blue
-					p-2 hover:scale-105 dark:border-reddit-text-light'
+						p-2 hover:scale-105 dark:border-reddit-text-light'
 						type='submit'
 					>
 						<p className='text-center font-bold text-reddit-blue dark:text-reddit-text-light'>
