@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { FormEvent, useState } from 'react';
@@ -72,6 +73,13 @@ const SignUp: NextPage = () => {
 					type='submit'
 					value='Sign Up'
 				/>
+				<Link href='/auth/login'>
+					<a>
+						<p className='text-center text-sm text-reddit-text-dark dark:text-reddit-text-light'>
+							Log In
+						</p>
+					</a>
+				</Link>
 			</form>
 		</div>
 	);
