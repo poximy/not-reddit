@@ -13,8 +13,12 @@ import { ParsedUrlQuery } from 'node:querystring';
 import NavBar from '@components/body/NavBar';
 import CommentForm from '@components/Post/CommentForm';
 
-type PostProp = (Post & { User: { username: string } }) | null;
-type CommentProp = (Comment & { User: { username: string } })[] | null;
+interface User {
+	User: { username: string };
+}
+
+type PostProp = (Post & User) | null;
+type CommentProp = (Comment & User)[] | null;
 
 interface Props {
 	post: PostProp;
@@ -89,11 +93,13 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 	};
 };
 
-const PostTitle: FC<{ title: string; text: string; username: string }> = ({
-	title,
-	text,
-	username,
-}) => {
+interface PostTitleProps {
+	title: string;
+	text: string;
+	username: string;
+}
+
+const PostTitle: FC<PostTitleProps> = ({ title, text, username }) => {
 	return (
 		<>
 			<div className='flex flex-row gap-2 justify-between items-center dark-body border-body round-2 w-full'>
@@ -123,10 +129,12 @@ const deleteComment = async function (commentId: string) {
 	});
 };
 
-const Comments: FC<{
+interface CommentsProp {
 	comments: CommentProp;
 	userId: string | undefined;
-}> = function ({ comments, userId }) {
+}
+
+const Comments: FC<CommentsProp> = function ({ comments, userId }) {
 	const router = useRouter();
 
 	const deleteButtonHandler = function (commentId: string) {
