@@ -139,8 +139,8 @@ const Comments: FC<CommentsProp> = function ({ comments, userId }) {
 	// Renders all comments to a given post
 	const router = useRouter();
 
-	const deleteButtonHandler = function (commentId: string) {
-		deleteComment(commentId);
+	const deleteButtonHandler = async function (commentId: string) {
+		await deleteComment(commentId);
 		setTimeout(router.reload, 1000);
 	};
 
