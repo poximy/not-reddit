@@ -5,6 +5,7 @@ import { FormEvent, useState } from 'react';
 import NavBar from '@components/body/NavBar';
 
 const SignUp: NextPage = () => {
+	// Renders a sign-up form that creates a new user
 	const router = useRouter();
 
 	const [password, setPassword] = useState<string>('');

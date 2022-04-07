@@ -1,6 +1,7 @@
 import { FC, FormEvent, useState } from 'react';
 import { useRouter } from 'next/router';
 
+// Renders a form for creating a post
 const PostForm: FC = () => {
 	const router = useRouter();
 

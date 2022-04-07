@@ -10,7 +10,7 @@ interface Props {
 }
 
 const LogIn: NextPage<Props> = ({ csrfToken }) => {
-	// Add signup text instead of button
+	// Render a form that allows a user to authenticate
 	return (
 		<>
 			<div className='flex flex-col items-center justify-center gap-4'>

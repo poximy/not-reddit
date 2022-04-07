@@ -99,7 +99,8 @@ interface PostTitleProps {
 	username: string;
 }
 
-const PostTitle: FC<PostTitleProps> = ({ title, text, username }) => {
+const PostTitleText: FC<PostTitleProps> = ({ title, text, username }) => {
+	// Renders title and text for a given post
 	return (
 		<>
 			<div className='flex flex-row gap-2 justify-between items-center dark-body border-body round-2 w-full'>
@@ -135,6 +136,7 @@ interface CommentsProp {
 }
 
 const Comments: FC<CommentsProp> = function ({ comments, userId }) {
+	// Renders all comments to a given post
 	const router = useRouter();
 
 	const deleteButtonHandler = function (commentId: string) {
@@ -159,6 +161,7 @@ const Comments: FC<CommentsProp> = function ({ comments, userId }) {
 							<p className='border-body dark-body round-2 w-full'>
 								{comment.text}
 							</p>
+							{/* Delete button only renders if the current user created the comment*/}
 							{userId && userId === comment.userId ? (
 								<button
 									onClick={() => deleteButtonHandler(comment.id)}
@@ -198,7 +201,7 @@ const PostID: NextPage<Props> = ({ post, comments }) => {
 						</p>
 					) : (
 						<>
-							<PostTitle
+							<PostTitleText
 								title={post.title}
 								text={post.text}
 								username={post.User.username}
