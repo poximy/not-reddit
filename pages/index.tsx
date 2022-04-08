@@ -40,8 +40,8 @@ const Home: NextPage<Props> = ({ posts }) => {
       <div className='flex flex-col items-center gap-4'>
         <NavBar />
         {posts === null ? (
-          <p className='round-2 shadow-box bg-reddit-orange'>
-            no posts available
+          <p className='round-2 shadow-box bg-reddit-orange text-2xl font-bold'>
+            No Posts Available
           </p>
         ) : (
           <>

@@ -73,25 +73,6 @@ const findComments = async function (postId: string) {
   }
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const id = validateUrlQueryParams(params);
-  if (id === null) {
-    return {
-      props: {
-        post: null,
-        comments: null,
-      },
-    };
-  }
-  const [post, comments] = await Promise.all([findPost(id), findComments(id)]);
-  return {
-    props: {
-      post,
-      comments,
-    },
-  };
-};
-
 interface PostTitleProps {
   title: string;
   text: string;
@@ -179,6 +160,25 @@ const Comments: FC<CommentsProp> = function ({ comments, userId }) {
   );
 };
 
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  const id = validateUrlQueryParams(params);
+  if (id === null) {
+    return {
+      props: {
+        post: null,
+        comments: null,
+      },
+    };
+  }
+  const [post, comments] = await Promise.all([findPost(id), findComments(id)]);
+  return {
+    props: {
+      post,
+      comments,
+    },
+  };
+};
+
 const PostID: NextPage<Props> = ({ post, comments }) => {
   const session = useSession();
 
@@ -206,8 +206,8 @@ const PostID: NextPage<Props> = ({ post, comments }) => {
       <Head>
         <title>{post.title} - Not Reddit</title>
       </Head>
+      {/* Parent div so w-frac (child) can work correctly */}
       <div className='flex flex-col items-center gap-4'>
-        {/* Parent div so w-frac can work correctly */}
         <NavBar />
         <div className='w-frac flex flex-col gap-4'>
           <PostTitleText
