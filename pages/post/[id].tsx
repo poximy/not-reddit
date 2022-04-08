@@ -194,7 +194,7 @@ const PostID: NextPage<Props> = ({ post, comments }) => {
       <div className='flex flex-col items-center gap-4'>
         {/* Parent div so w-frac can work correctly */}
         <NavBar />
-        <div className='transition-ease w-frac flex flex-col gap-4'>
+        <div className='w-frac flex flex-col gap-4'>
           {post === null ? (
             <p className='shadow-box round-2 bg-reddit-orange'>
               Error post was not found
@@ -206,23 +206,7 @@ const PostID: NextPage<Props> = ({ post, comments }) => {
                 text={post.text}
                 username={post.User.username}
               />
-              {/* Renders Form only if a user is signed in */}
-              {session.data === null ? (
-                <div className='dark-body border-body rounded'>
-                  <Link href='/auth/login'>
-                    <a>
-                      <p
-                        className='p-2 text-center text-reddit-text-dark
-												dark:text-reddit-text-light'
-                      >
-                        Log In To Comment
-                      </p>
-                    </a>
-                  </Link>
-                </div>
-              ) : (
-                <CommentForm postId={post.id} />
-              )}
+              <CommentForm postId={post.id} sessionData={session.data} />
               <Comments comments={comments} userId={session.data?.user.id} />
             </>
           )}

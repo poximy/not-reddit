@@ -1,12 +1,17 @@
-import { FC, FormEvent } from 'react';
 import { useState } from 'react';
+import { FC, FormEvent } from 'react';
+
+import Link from 'next/link';
 import { useRouter } from 'next/router';
+import type { Session } from 'next-auth';
 
 interface Props {
   postId: string;
+  sessionData: Session | null;
 }
 
-const CommentForm: FC<Props> = ({ postId }) => {
+const CommentForm: FC<Props> = ({ postId, sessionData }) => {
+  // Renders Form only if a user is signed in
   const [commentText, setCommentText] = useState<string>('');
   const [error, setError] = useState<string>('');
 
@@ -35,6 +40,23 @@ const CommentForm: FC<Props> = ({ postId }) => {
       setError('Cannot create comment :(');
     }
   };
+
+  if (sessionData === null) {
+    return (
+      <div className='dark-body border-body rounded'>
+        <Link href='/auth/login'>
+          <a>
+            <p
+              className='p-2 text-center text-reddit-text-dark
+												dark:text-reddit-text-light'
+            >
+              Log In To Comment
+            </p>
+          </a>
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <>
