@@ -3,7 +3,6 @@ import { Comment, Post } from '@prisma/client';
 
 import { FC } from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { GetServerSideProps, NextPage } from 'next';
@@ -144,40 +143,38 @@ const Comments: FC<CommentsProp> = function ({ comments, userId }) {
     setTimeout(router.reload, 1000);
   };
 
+  if (comments === null || comments.length === 0) {
+    return (
+      <p className='dark-body round-2 border-body text-center'>No Comments</p>
+    );
+  }
+
   return (
     <>
-      {comments === null || comments.length === 0 ? (
-        <p className='dark-body round-2 border-body text-center'>No Comments</p>
-      ) : (
-        <>
-          {comments.map(comment => (
-            <div key={comment.id} className='group relative'>
-              <p
-                className='absolute -top-6 p-2 px-2 text-xs text-white
-								text-reddit-text-dark/50 dark:text-reddit-text-light/50'
-              >
-                u/{comment.User.username}
-              </p>
-              <p className='border-body dark-body round-2 w-full'>
-                {comment.text}
-              </p>
-              {/* Delete button only renders if the current user created the comment*/}
-              {userId && userId === comment.userId ? (
-                <button
-                  onClick={() => deleteButtonHandler(comment.id)}
-                  className='absolute top-0 right-0 h-8 w-8 rounded-b rounded-tr
-									bg-reddit-orange p-2 font-bold leading-none opacity-0
-									group-hover:opacity-100'
-                >
-                  X
-                </button>
-              ) : (
-                ''
-              )}
-            </div>
-          ))}
-        </>
-      )}
+      {comments.map(comment => (
+        <div key={comment.id} className='group relative'>
+          <p
+            className='absolute -top-6 p-2 px-2 text-xs text-white
+						text-reddit-text-dark/50 dark:text-reddit-text-light/50'
+          >
+            u/{comment.User.username}
+          </p>
+          <p className='border-body dark-body round-2 w-full'>{comment.text}</p>
+          {/* Delete button only renders if the current user created the comment*/}
+          {userId && userId === comment.userId ? (
+            <button
+              onClick={() => deleteButtonHandler(comment.id)}
+              className='absolute top-0 right-0 h-8 w-8 rounded-b rounded-tr
+							bg-reddit-orange p-2 font-bold leading-none opacity-0 transition-opacity
+							duration-300 group-hover:opacity-100 group-hover:duration-150'
+            >
+              X
+            </button>
+          ) : (
+            ''
+          )}
+        </div>
+      ))}
     </>
   );
 };
