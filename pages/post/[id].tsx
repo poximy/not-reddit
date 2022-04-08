@@ -181,32 +181,42 @@ const Comments: FC<CommentsProp> = function ({ comments, userId }) {
 
 const PostID: NextPage<Props> = ({ post, comments }) => {
   const session = useSession();
+
+  if (post === null) {
+    return (
+      <>
+        <Head>
+          <title>Post not Found - Not Reddit</title>
+        </Head>
+        <div className='flex w-full flex-col items-center gap-4'>
+          <NavBar />
+          <p
+            className='round-2 w-frac bg-reddit-orange text-center text-2xl
+            font-bold text-white'
+          >
+            Error post was not found
+          </p>
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
       <Head>
-        <title>
-          {post !== null ? post.title : 'Post not found'} - Not Reddit
-        </title>
+        <title>{post.title} - Not Reddit</title>
       </Head>
       <div className='flex flex-col items-center gap-4'>
         {/* Parent div so w-frac can work correctly */}
         <NavBar />
         <div className='w-frac flex flex-col gap-4'>
-          {post === null ? (
-            <p className='shadow-box round-2 bg-reddit-orange'>
-              Error post was not found
-            </p>
-          ) : (
-            <>
-              <PostTitleText
-                title={post.title}
-                text={post.text}
-                username={post.User.username}
-              />
-              <CommentForm postId={post.id} sessionData={session.data} />
-              <Comments comments={comments} userId={session.data?.user.id} />
-            </>
-          )}
+          <PostTitleText
+            title={post.title}
+            text={post.text}
+            username={post.User.username}
+          />
+          <CommentForm postId={post.id} sessionData={session.data} />
+          <Comments comments={comments} userId={session.data?.user.id} />
         </div>
       </div>
     </>
