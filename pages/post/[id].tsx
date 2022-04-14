@@ -3,6 +3,7 @@ import { Comment, Post } from '@prisma/client';
 
 import { FC } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { GetServerSideProps, NextPage } from 'next';
@@ -83,11 +84,20 @@ const PostTitleText: FC<PostTitleProps> = ({ title, text, username }) => {
   // Renders title and text for a given post
   return (
     <>
-      <div className='dark-body border-body round-2 flex w-full flex-row items-center justify-between gap-2'>
+      <div
+        className='dark-body border-body round-2 flex w-full flex-row items-center
+        justify-between gap-2'
+      >
         <p className='w-fit line-clamp-1'>{title}</p>
-        <p className='text-reddit-text-dark/50 dark:text-reddit-text-light/50'>
-          Posted By: {username}
-        </p>
+        <div
+          className='flex flex-row gap-0.5 text-reddit-text-dark/50
+          dark:text-reddit-text-light/50'
+        >
+          <p>Posted By:</p>
+          <Link href={`/user/${username}`}>
+            <a>u/{username}</a>
+          </Link>
+        </div>
       </div>
       {text !== '' ? (
         <p className='dark-body round-2 border-body w-full'>{text}</p>
@@ -134,12 +144,14 @@ const Comments: FC<CommentsProp> = function ({ comments, userId }) {
     <>
       {comments.map(comment => (
         <div key={comment.id} className='group relative'>
-          <p
-            className='absolute -top-6 p-2 px-2 text-xs text-white
-						text-reddit-text-dark/50 dark:text-reddit-text-light/50'
-          >
-            u/{comment.User.username}
-          </p>
+          <Link href={`/user/${comment.User.username}`}>
+            <a
+              className='absolute -top-6 m-2 text-xs text-reddit-text-dark/50
+              dark:text-reddit-text-light/50'
+            >
+              u/{comment.User.username}
+            </a>
+          </Link>
           <p className='border-body dark-body round-2 w-full'>{comment.text}</p>
           {/* Delete button only renders if the current user created the comment*/}
           {userId && userId === comment.userId ? (
