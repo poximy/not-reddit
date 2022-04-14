@@ -25,7 +25,7 @@ const createUser = async function ({ username, password }: Body) {
   });
 
   if (userExists === null) {
-    const user = await prisma.user.create({
+    return await prisma.user.create({
       data: {
         username,
         password,
@@ -35,7 +35,6 @@ const createUser = async function ({ username, password }: Body) {
         username: true,
       },
     });
-    return user;
   } else {
     throw Error('Username already exists');
   }
