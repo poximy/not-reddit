@@ -141,25 +141,23 @@ const Comments: FC<CommentsProp> = function ({ comments, userId }) {
   }
 
   return (
-    <>
+    <div className='dark-body border-body round-2 flex flex-col gap-4'>
       {comments.map(comment => (
         <div key={comment.id} className='group relative'>
           <Link href={`/user/${comment.User.username}`}>
-            <a
-              className='absolute -top-6 m-2 text-xs text-reddit-text-dark/50
-              dark:text-reddit-text-light/50'
-            >
+            <a className='text-xs text-reddit-text-dark/50 dark:text-reddit-text-light/50'>
               u/{comment.User.username}
             </a>
           </Link>
-          <p className='border-body dark-body round-2 w-full'>{comment.text}</p>
+          <p className='w-full'>{comment.text}</p>
           {/* Delete button only renders if the current user created the comment*/}
           {userId && userId === comment.userId ? (
             <button
               onClick={() => deleteButtonHandler(comment.id)}
-              className='absolute top-0 right-0 h-8 w-8 rounded-b rounded-tr
-							bg-reddit-orange p-2 font-bold leading-none opacity-0 transition-opacity
-							duration-300 group-hover:opacity-100 group-hover:duration-150'
+              className='absolute top-0 right-0 my-2 aspect-square h-full max-h-8
+              translate-y-0 rounded text-lg font-bold text-black opacity-0
+              transition-all duration-300 hover:scale-105 group-hover:bg-reddit-orange
+              group-hover:opacity-100 group-hover:duration-150'
             >
               X
             </button>
@@ -168,7 +166,7 @@ const Comments: FC<CommentsProp> = function ({ comments, userId }) {
           )}
         </div>
       ))}
-    </>
+    </div>
   );
 };
 
