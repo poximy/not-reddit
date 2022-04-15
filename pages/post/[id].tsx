@@ -84,13 +84,10 @@ const PostTitleText: FC<PostTitleProps> = ({ title, text, username }) => {
   // Renders title and text for a given post
   return (
     <>
-      <div
-        className='dark-body border-body round-2 flex w-full flex-row items-center
-        justify-between gap-2'
-      >
-        <p className='w-fit line-clamp-1'>{title}</p>
+      <div className='dark-body border-body round-2 flex w-full flex-row justify-between gap-2'>
+        <p className='w-fit'>{title}</p>
         <div
-          className='flex flex-row gap-0.5 text-reddit-text-dark/50
+          className='flex min-w-fit flex-row gap-0.5 text-reddit-text-dark/50
           dark:text-reddit-text-light/50'
         >
           <p>Posted By:</p>
