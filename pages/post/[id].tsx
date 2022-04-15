@@ -92,7 +92,7 @@ const PostTitleText: FC<PostTitleProps> = ({ title, text, username }) => {
         >
           <p>Posted By:</p>
           <Link href={`/user/${username}`}>
-            <a>u/{username}</a>
+            <a className='hover:underline'>u/{username}</a>
           </Link>
         </div>
       </div>
@@ -142,7 +142,10 @@ const Comments: FC<CommentsProp> = function ({ comments, userId }) {
       {comments.map(comment => (
         <div key={comment.id} className='group relative'>
           <Link href={`/user/${comment.User.username}`}>
-            <a className='text-xs text-reddit-text-dark/50 dark:text-reddit-text-light/50'>
+            <a
+              className='text-xs text-reddit-text-dark/50 hover:underline
+              dark:text-reddit-text-light/50'
+            >
               u/{comment.User.username}
             </a>
           </Link>
