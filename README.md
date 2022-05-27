@@ -12,6 +12,7 @@ Tailwindcss: Styles
 
 Made with ❤️
 
+## Setup
 To start run `pnpm install` then `pnpm prisma generate`
 
 After that you can launch the dev server with `pnpm dev`
