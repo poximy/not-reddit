@@ -2,7 +2,7 @@
 
 This is not a reddit clone I made for fun :)
 
-Not-Reddit lets you view / create post & comment. More features to come next!
+Not-Reddit lets you view / create post & comment. You can now create an account and view past content.
 
 Technologies:
 Nextjs: Frontend / SSR
