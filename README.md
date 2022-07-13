@@ -10,9 +10,12 @@ NextAuth: Authentication
 Prisma ORM: Database
 Tailwindcss: Styles
 
-Made with ❤️
+### Light & Dark Mode Ready 👀
+![Project Preview](/assets/web-app.png)
 
 ## Setup
 To start run `pnpm install` then `pnpm prisma generate`
 
 After that you can launch the dev server with `pnpm dev`
+
+Made with ❤️
